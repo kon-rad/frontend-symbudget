@@ -1,0 +1,58 @@
+/* Coolors Exported Palette - coolors.co/9d44b5-b5446e-525252-badefc-0affed */
+
+/* HSL */
+/*$color1: hsla(287%, 45%, 49%, 1);*/
+/*$color2: hsla(338%, 45%, 49%, 1);*/
+/*$color3: hsla(0%, 0%, 32%, 1);*/
+/*$color4: hsla(207%, 92%, 86%, 1);*/
+/*$color5: hsla(176%, 100%, 52%, 1);*/
+
+/*!* RGB *!*/
+/*$color1: rgba(157, 68, 181, 1);*/
+/*$color2: rgba(181, 68, 110, 1);*/
+/*$color3: rgba(82, 82, 82, 1);*/
+/*$color4: rgba(186, 222, 252, 1);*/
+/*$color5: rgba(10, 255, 237, 1);*/
+
+.App {
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.header, .dashboard {
+  height: 100vh;
+}
+
+.footer {
+  width:100%;
+  height:300px;
+  padding: 60px;
+  text-align:center;
+  background-color:#badefc;
+}
+.home {
+  text-align: center;
+}
