@@ -9,29 +9,31 @@ const fetchBudgets = () => {
     return new Promise((resolve, reject) => {
         request(`http://127.0.0.1:8000/budgets`, function (error, response, body) {
             resolve(JSON.parse(body));
-            console.log(body);
         });
     });
 }
 class Dashboard extends Component {
-    loadBudgets() {
-        fetchBudgets()
-            .then(budget => {
-                this.setState({...budget})
-            })
-
-    }
     constructor(props) {
         super(props);
         this.state = {
             budgets: []
         }
+        this.loadBudgets = this.loadBudgets.bind(this);
+    }
+    componentWillMount() {
         this.loadBudgets();
+    }
+    loadBudgets() {
+        fetchBudgets()
+            .then(budget => {
+                this.setState({ ... budget })
+            })
+        console.log('loadBudgets here yo');
     }
     render() {
         console.log(this.state);
         const budgetItems = this.state.budgets.map(budget => {
-            return <Category key={budget.id} budget={budget} />
+            return <Category key={budget.id} budget={budget} reLoad={this.loadBudgets} />
         })
         return (
             <div className="dashboard">
@@ -46,11 +48,12 @@ class Dashboard extends Component {
                                         <th>Date</th>
                                         <th>Item</th>
                                         <th>Amount</th>
+                                        <th>Category</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
                                     { budgetItems }
-                                    <AddItem />
+                                    <tbody>
+                                        <AddItem reLoad={this.loadBudgets}/>
                                     </tbody>
                                 </table>
                             </div>

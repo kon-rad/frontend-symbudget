@@ -9,7 +9,7 @@ class AddItem extends Component {
             newItemDate: '',
             newItemAmount: '',
             newItemCategory: '',
-        }
+        };
     }
 
     changeNewItemName(event) {
@@ -27,7 +27,7 @@ class AddItem extends Component {
     createNewItem(event) {
 
         request.post(
-            `http://localhost:8000//budget/create`,
+            `http://127.0.0.1:8000/budgets`,
             {
                 form: {
                     item: this.state.newItemName,
@@ -37,14 +37,14 @@ class AddItem extends Component {
                 }
             },
             () => {
-
+                this.props.reLoad();
+                console.log('sup ...', this.state);
             }
         );
     }
     render() {
         return (
             <tr className="addItem">
-                hello dis additem
                 <td><input type="text" value={this.state.newItemDate}
                            onChange={this.changeNewItemDate.bind(this)} placeholder="ddmmyy"/></td>
                 <td><input type="text" value={this.state.newItemName}
