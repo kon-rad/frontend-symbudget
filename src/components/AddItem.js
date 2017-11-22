@@ -26,21 +26,28 @@ class AddItem extends Component {
     }
     createNewItem(event) {
 
-        request.post(
-            `http://127.0.0.1:8000/budgets`,
-            {
-                form: {
-                    item: this.state.newItemName,
-                    amount: this.state.newItemAmount,
-                    category: this.state.newItemCategory,
-                    date: this.state.newItemDate
+        return new Promise((resolve, reject) => {
+            request.post(
+                `http://127.0.0.1:8000/budgets`,
+                {
+                    form: {
+                        item: this.state.newItemName,
+                        amount: this.state.newItemAmount,
+                        category: this.state.newItemCategory,
+                        date: this.state.newItemDate
+                    }
+                },
+                () => {
+                    this.props.reLoad();
+                    console.log('sup ...', this.state);
                 }
-            },
-            () => {
-                this.props.reLoad();
-                console.log('sup ...', this.state);
-            }
-        );
+            )
+                .then(() => {
+
+                    this.props.reLoad();
+                    console.log('this is then sup ...', this.state);
+                });
+        });
     }
     render() {
         return (

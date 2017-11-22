@@ -33,7 +33,7 @@ class Dashboard extends Component {
     render() {
         console.log(this.state);
         const budgetItems = this.state.budgets.map(budget => {
-            return <Category key={budget.id} budget={budget} reLoad={this.loadBudgets} />
+            return <Category key={budget.id} budget={budget} reLoad={() => this.loadBudgets()} />
         })
         return (
             <div className="dashboard">

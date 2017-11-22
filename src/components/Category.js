@@ -72,6 +72,7 @@ class Category extends Component {
     editBudgets(id) {
 
         return new Promise((resolve, reject) => {
+            var self = this;
             request.put(
                 `http://127.0.0.1:8000/budgets/${id}`,
                 {
@@ -84,6 +85,8 @@ class Category extends Component {
                 },
                 function (error, response, body) {
                     console.log(body);
+                    self.props.reLoad();
+
                 }
             );
         });
