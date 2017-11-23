@@ -27,14 +27,13 @@ class Dashboard extends Component {
         fetchBudgets()
             .then(budget => {
                 this.setState({ ... budget })
-            })
-        console.log('loadBudgets here yo');
+            });
     }
     render() {
         console.log(this.state);
         const budgetItems = this.state.budgets.map(budget => {
             return <Category key={budget.id} budget={budget} reLoad={() => this.loadBudgets()} />
-        })
+        });
         return (
             <div className="dashboard">
                 <div className="container">

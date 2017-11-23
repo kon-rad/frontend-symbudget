@@ -39,14 +39,8 @@ class AddItem extends Component {
                 },
                 () => {
                     this.props.reLoad();
-                    console.log('sup ...', this.state);
                 }
-            )
-                .then(() => {
-
-                    this.props.reLoad();
-                    console.log('this is then sup ...', this.state);
-                });
+            );
         });
     }
     render() {

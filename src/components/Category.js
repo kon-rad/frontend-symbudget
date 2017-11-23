@@ -51,15 +51,15 @@ class Category extends Component {
         this.handleClick();
     }
     handleDelete() {
+        var self = this;
         request.delete(
             {url: `http://127.0.0.1:8000/budgets/${this.state.id}`},
             function (error, response, body) {
-                console.log(body);
+                self.props.reLoad();
             }
         );
         this.setState({editing: false});
         document.removeEventListener('click', this.handleOutsideClick, false);
-        this.props.reLoad();
     }
     handleSubmit() {
         console.log('submit', this.state.date);
