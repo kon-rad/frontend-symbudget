@@ -26,7 +26,7 @@ class Dashboard extends Component {
     loadBudgets() {
         fetchBudgets()
             .then(budget => {
-                this.setState({ ... budget })
+                this.setState({ ...budget })
             });
     }
     render() {
