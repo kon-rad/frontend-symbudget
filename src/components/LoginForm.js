@@ -1,7 +1,7 @@
 import React  from 'react';
 import {Field, reduxForm} from 'redux-form';
-import FormField from './FormField';
-import * as FORMS from '../constants/Forms';
+// import FormField from './FormField';
+import PropTypes from 'prop-types';
 
 const LoginForm = (props) => {
 
@@ -12,7 +12,7 @@ const LoginForm = (props) => {
 
             <h2 className="form-signin-heading">Welcome back</h2>
 
-            <Field component={FormField}
+            <Field component="input"
                    name="username"
                    id="username"
                    type="text"
@@ -20,7 +20,7 @@ const LoginForm = (props) => {
                    required="required"
             />
 
-            <Field component={FormField}
+            <Field component="input"
                    name="password"
                    id="password"
                    type="password"
@@ -28,24 +28,24 @@ const LoginForm = (props) => {
                    required="required"
             />
 
-            <button className="btn btn-lg btn-primary btn-block"
-                    disabled={props.pristine || props.isSubmitting}
+            <button className="btn btn-sm btn-primary"
                     type="submit">
-                {props.isSubmitting ? <i className="fa fa-spin fa-spinner" /> : null} Log in
+                Log in
             </button>
+
 
         </form>
     );
 };
 
 LoginForm.propTypes = {
-    handleSubmit: React.PropTypes.func.isRequired,
-    onSubmit: React.PropTypes.func.isRequired,
-    pristine: React.PropTypes.bool.isRequired,
-    isSubmitting: React.PropTypes.bool.isRequired
+    // handleSubmit: React.PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    // pristine: React.PropTypes.bool.isRequired,
+    // isSubmitting: React.PropTypes.bool.isRequired
 };
 
 // Decorate the form component
 export default reduxForm({
-    form: FORMS.LOGIN // a unique name for this form
+    form: 'login'
 })(LoginForm);

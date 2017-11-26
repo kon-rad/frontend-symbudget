@@ -4,12 +4,21 @@ import './styles/index.css';
 import { AppContainer } from 'react-hot-loader'
 import routes from './routes';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import configureStore from './store/configureStore';
+import {Provider} from 'react-redux';
+
+
+const store = configureStore();
 
 ReactDOM.render(
-    <AppContainer>
-        {routes}
-    </AppContainer>,
-    document.getElementById('root')
+    <Provider store={store}>
+        <AppContainer>
+            {routes}
+        </AppContainer>
+    </Provider>
+    ,
+        document.getElementById('root')
+
 );
 
 // Webpack Hot Module Replacement API
@@ -17,9 +26,11 @@ if (module.hot) {
     module.hot.accept('./routes', () => {
         const routes = require('./routes').default;
         ReactDOM.render(
-            <AppContainer>
-                {routes}
-            </AppContainer>,
+            <Provider store={store}>
+                <AppContainer>
+                    {routes}
+                </AppContainer>
+            </Provider>,
             document.getElementById('root')
         );
     });

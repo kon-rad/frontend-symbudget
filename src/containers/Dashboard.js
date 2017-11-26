@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../../styles/App.css';
-import Category from 'components/Category';
-import AddItem from 'components/AddItem';
+import '../styles/App.css';
+import Category from '../components/Category';
+import AddItem from '../components/AddItem';
 import request from 'request';
 
 
