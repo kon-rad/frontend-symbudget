@@ -24,9 +24,9 @@ class AddItem extends Component {
     changeNewItemCategory(event) {
         this.setState({newItemCategory: event.target.value});
     }
-    createNewItem(event) {
+    createNewItem() {
 
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             request.post(
                 `http://127.0.0.1:8000/budgets`,
                 {

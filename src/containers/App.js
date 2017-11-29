@@ -4,15 +4,22 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import NavBar from '../components/NavBar';
+import { Container, Row } from 'reactstrap';
 
 class App extends Component {
   render() {
       console.log('app here', this.props);
     return (
       <div className="App">
-        <Header />
-          {this.props.auth.isAuthenticated ? 'Welcome back!' : 'You must login'}
-          {this.props.children}
+          <NavBar
+              auth={this.props.auth}
+          />
+          <Container className="content-wrapper">
+              <Row>
+                  {this.props.children}
+              </Row>
+          </Container>
           <Footer />
       </div>
     );
@@ -21,7 +28,7 @@ class App extends Component {
 
 App.propTypes = {
     auth: PropTypes.object.isRequired,
-    children: PropTypes.element
+    children: PropTypes.array
 };
 
 function mapStateToProps(state) {

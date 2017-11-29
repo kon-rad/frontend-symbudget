@@ -1,49 +1,53 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import { createLogger } from 'redux-logger'
-// import {routerMiddleware} from 'react-router-redux';
+import {routerMiddleware} from 'react-router-redux';
 import createSagaMiddleware, {END} from 'redux-saga';
 import sagas from '../sagas';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import rootReducer from '../reducers';
 import _ from 'lodash';
 import {loadState, saveState} from '../connectivity/localStorage';
+import { BrowserRouter } from 'react-router-dom'
 
+
+const routerMw = routerMiddleware(BrowserRouter);
 const persistedState = loadState();
 const loggerMiddleware = createLogger();
 const sagaMiddleware = createSagaMiddleware();
 
-function configureStoreProd(persistedState) {
-  const middlewares = [
-    sagaMiddleware
-  ];
+function configureStoreProd() {
+    const middlewares = [
+        routerMw,
+        sagaMiddleware
+    ];
 
-  const store = createStore(rootReducer, persistedState, compose(
-    applyMiddleware(...middlewares)
-    )
-  );
+    const store = createStore(rootReducer, persistedState, compose(
+            applyMiddleware(...middlewares)
+        )
+    );
 
-  store.subscribe(_.throttle(() => {
-    saveState({
-      auth: store.getState().auth
-    });
-  }, 1000));
+    store.subscribe(_.throttle(() => {
+        saveState({
+            auth: store.getState().auth
+        });
+    }, 1000));
 
-  sagaMiddleware.run(sagas);
-  store.close = () => store.dispatch(END);
+    sagaMiddleware.run(sagas);
+    store.close = () => store.dispatch(END);
 
-  return store;
+    return store;
 }
 
-function configureStoreDev(persistedState) {
+function configureStoreDev() {
     const middlewares = [
         // Add other middleware on this line...
 
         // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
         reduxImmutableStateInvariant(),
-
-    sagaMiddleware,
-    loggerMiddleware
-  ];
+        routerMw,
+        sagaMiddleware,
+        loggerMiddleware
+    ];
 
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
     const store = createStore(rootReducer, persistedState, composeEnhancers(
@@ -51,24 +55,24 @@ function configureStoreDev(persistedState) {
         )
     );
 
-  store.subscribe(_.throttle(() => {
-    saveState({
-      auth: store.getState().auth
-    });
-  }, 1000));
+    store.subscribe(_.throttle(() => {
+        saveState({
+            auth: store.getState().auth
+        });
+    }, 1000));
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers').default; // eslint-disable-line global-require
-      store.replaceReducer(nextReducer);
-    });
-  }
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('../reducers', () => {
+            const nextReducer = require('../reducers').default; // eslint-disable-line global-require
+            store.replaceReducer(nextReducer);
+        });
+    }
 
-  sagaMiddleware.run(sagas);
-  store.close = () => store.dispatch(END);
+    sagaMiddleware.run(sagas);
+    store.close = () => store.dispatch(END);
 
-  return store;
+    return store;
 }
 
 const configureStore = process.env.NODE_ENV === 'production' ? configureStoreProd : configureStoreDev;

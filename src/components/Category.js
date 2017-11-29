@@ -54,7 +54,7 @@ class Category extends Component {
         var self = this;
         request.delete(
             {url: `http://127.0.0.1:8000/budgets/${this.state.id}`},
-            function (error, response, body) {
+            function () {
                 self.props.reLoad();
             }
         );
@@ -71,7 +71,7 @@ class Category extends Component {
 
     editBudgets(id) {
 
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             var self = this;
             request.put(
                 `http://127.0.0.1:8000/budgets/${id}`,

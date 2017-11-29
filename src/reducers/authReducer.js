@@ -19,6 +19,7 @@ export default function auth(state = {
         }
 
         case types.LOGOUT__COMPLETED: {
+
             return Object.assign({}, state, {
                 isAuthenticated: false,
                 id: undefined,
