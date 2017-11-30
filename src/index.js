@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './styles/index.css';
 import { AppContainer } from 'react-hot-loader'
 import routes from './routes';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import configureStore from './store/configureStore';
 import {Provider} from 'react-redux';
 
