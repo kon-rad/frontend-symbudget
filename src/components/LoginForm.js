@@ -1,7 +1,9 @@
 import React  from 'react';
 import {Field, reduxForm} from 'redux-form';
-// import FormField from './FormField';
 import PropTypes from 'prop-types';
+import {Button} from 'reactstrap';
+import '../styles/login-form.css';
+import * as FORMS from '../constants/Forms';
 
 const LoginForm = (props) => {
 
@@ -18,6 +20,7 @@ const LoginForm = (props) => {
                    type="text"
                    placeholder="Username or Email Address"
                    required="required"
+                   className="form-control"
             />
 
             <Field component="input"
@@ -26,12 +29,25 @@ const LoginForm = (props) => {
                    type="password"
                    placeholder="Password"
                    required="required"
+                   className="form-control"
             />
 
-            <button className="btn btn-sm btn-primary"
-                    type="submit">
-                Log in
-            </button>
+            <Button type="submit"
+                    size="lg"
+                    block
+                    color="success"
+                    >
+                {props.submitting ?
+                    <span>
+                        <i className="fa fa-spin fa-spinner"/> Logging In...
+                    </span>
+
+                                :
+
+                    <span>Login</span>
+                }
+            </Button>
+            {console.log('props:', props, props.submitting)}
 
 
         </form>
@@ -39,13 +55,13 @@ const LoginForm = (props) => {
 };
 
 LoginForm.propTypes = {
-    // handleSubmit: React.PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     // pristine: React.PropTypes.bool.isRequired,
-    // isSubmitting: React.PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired
 };
 
 // Decorate the form component
 export default reduxForm({
-    form: 'login'
+    form: FORMS.FORM_LOGIN
 })(LoginForm);

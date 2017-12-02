@@ -34,6 +34,7 @@ class LoginPage extends Component {
                     <div className="col-md-12">
                         <LoginForm
                             onSubmit={this.doLogin.bind(this)}
+                            // submitting={true}
                             // isSubmitting={!!this.props.pageState.request.sendingRequest}
                         />
                     </div>

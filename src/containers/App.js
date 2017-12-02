@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import NavBar from '../components/NavBar';
-import { Container, Row } from 'reactstrap';
+// import  'font-awesome/css/font-awesome.css';
+// import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 class App extends Component {
   render() {
@@ -15,11 +15,7 @@ class App extends Component {
           <NavBar
               auth={this.props.auth}
           />
-          <Container className="content-wrapper">
-              <Row>
-                  {this.props.children}
-              </Row>
-          </Container>
+            {this.props.children}
           <Footer />
       </div>
     );

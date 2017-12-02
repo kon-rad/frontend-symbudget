@@ -1,15 +1,19 @@
 import * as api from '../connectivity/api';
 import {call, put} from 'redux-saga/effects';
-import {takeLatest} from 'redux-saga';
+import {takeLatest, delay} from 'redux-saga';
 import * as types from '../constants/ActionTypes';
+import * as FORMS from '../constants/Forms';
 import jwtDecode from 'jwt-decode';
-import {push} from 'react-router-redux';
+import {startSubmit, stopSubmit} from 'redux-form';
+import { push } from 'react-router-redux';
 
 
 
 export function *doLogin(action) {
 
     try {
+
+        yield put(startSubmit(FORMS.FORM_LOGIN));
 
         const {username, password} = action.payload;
 
@@ -35,6 +39,10 @@ export function *doLogin(action) {
                 statusCode: e.statusCode
             }
         });
+
+    } finally {
+
+        yield put(stopSubmit(FORMS.FORM_LOGIN));
 
     }
 }
@@ -73,8 +81,6 @@ export function *watchLoginFailed() {
 
 
 export function *doLogoutRequested() {
-    console.log('doLogoutRequested');
-
     yield put({
         type: types.LOGOUT__COMPLETED
     });
@@ -82,11 +88,8 @@ export function *doLogoutRequested() {
     yield put(
         push('/')
     );
-
 }
 
 export function *watchLogoutRequested() {
-    console.log('watchLogoutRequested');
-
     yield takeLatest(types.LOGOUT__REQUESTED, doLogoutRequested);
 }

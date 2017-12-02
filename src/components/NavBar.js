@@ -43,25 +43,24 @@ class NavBar extends Component {
                 <NavItem>
                     <NavLink href="/login">Log in</NavLink>
                 </NavItem>
-
             </Nav>
-    };
+    }
 
     render() {
         return (
             <div>
                 <Navbar color="faded" light expand='md'>
                     <NavbarBrand href="/">SymBudget App</NavbarBrand>
-                    {/*<NavbarToggler onClick={this.toggle} />*/}
-                    {/*<Collapse isOpen={this.state.isOpen} navbar>*/}
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
                         {this.loginOrProfile(this.props.auth)}
-                    {/*</Collapse>*/}
+                    </Collapse>
                 </Navbar>
             </div>
         );
 
     }
-};
+}
 
 NavBar.propTypes = {
     auth: PropTypes.object.isRequired
