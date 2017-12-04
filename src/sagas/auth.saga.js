@@ -4,7 +4,6 @@ import {takeLatest, delay} from 'redux-saga';
 import * as types from '../constants/ActionTypes';
 import * as FORMS from '../constants/Forms';
 import jwtDecode from 'jwt-decode';
-import {startSubmit, stopSubmit} from 'redux-form';
 import { push } from 'react-router-redux';
 
 
@@ -13,7 +12,12 @@ export function *doLogin(action) {
 
     try {
 
-        yield put(startSubmit(FORMS.FORM_LOGIN));
+        yield put({
+            type: types.REQUEST__STARTED,
+            payload: {
+                requestFrom: 'authSaga.doLogin'
+            }
+        });
 
         const {username, password} = action.payload;
 
@@ -42,7 +46,13 @@ export function *doLogin(action) {
 
     } finally {
 
-        yield put(stopSubmit(FORMS.FORM_LOGIN));
+
+        yield put({
+            type: types.REQUEST__FINISHED,
+            payload: {
+                sendingRequest: false
+            }
+        });
 
     }
 }

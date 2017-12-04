@@ -1,7 +1,6 @@
-// import React, {PropTypes, Component} from 'react';
 import React, {Component} from 'react';
-// import {connect} from 'react-redux';
-// import {withRouter} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {withRouter} from 'react-router';
 import LoginForm from '../components/LoginForm';
 import * as types from '../constants/ActionTypes';
 // import '../styles/login-page.css';
@@ -9,15 +8,15 @@ import {connect} from 'react-redux';
 
 class LoginPage extends Component {
 
-    // componentWillReceiveProps(newProps) {
-    //     if (newProps.pageState.auth.isAuthenticated) {
-    //         this.props.router.replace('/');
-    //     }
-    // }
-    //
+    componentWillReceiveProps(newProps) {
+        if (newProps.pageState.auth.isAuthenticated) {
+            // this.props.router.replace('/');
+            this.props.history.push('/dashboard');
+            console.log('success*********', this.props.history);
+        }
+    }
+
     doLogin(formData) {
-        console.log('form data: $$$$$', formData);
-        console.log(' this.props: ', this.props);
         this.props.dispatch({
             type: types.LOGIN__REQUESTED,
             payload: {
@@ -35,7 +34,7 @@ class LoginPage extends Component {
                         <LoginForm
                             onSubmit={this.doLogin.bind(this)}
                             // submitting={true}
-                            // isSubmitting={!!this.props.pageState.request.sendingRequest}
+                            isSubmitting={this.props.pageState.request.sendingRequest}
                         />
                     </div>
                 </div>
@@ -44,20 +43,22 @@ class LoginPage extends Component {
     }
 }
 
-// LoginPage.propTypes = {
-//     dispatch: PropTypes.func.isRequired,
-//     pageState: PropTypes.object.isRequired,
-//     router: PropTypes.object.isRequired
-// };
-//
-// const mapStateToProps = (state) => {
-//     return {
-//         pageState: state
-//     };
-// };
-//
-// export default connect(
-//     mapStateToProps
-// )(withRouter(LoginPage))
+LoginPage.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    pageState: PropTypes.object.isRequired,
+    router: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => {
+    return {
+        pageState: state
+    };
+};
+
+export default connect(
+    mapStateToProps
+)(
+    withRouter(LoginPage)
+);
 // export default LoginPage;
-export default connect()(LoginPage);
+// export default connect()(LoginPage);

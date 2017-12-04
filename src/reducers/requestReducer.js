@@ -1,13 +1,22 @@
-import {SENDING_REQUEST} from '../constants/actionTypes';
+import {REQUEST__STARTED} from '../constants/ActionTypes';
 
-export default function request(state, action) {
+export default function request(state = {
+    sendingRequest: false,
+    inProgress: []
+}, action) {
 
     switch (action.type) {
 
-        case SENDING_REQUEST: {
+        case REQUEST__STARTED: {
+
             return Object.assign({}, state, {
-                sendingRequest: action.payload.sendingRequest
-            })
+                sendingRequest: true,
+                inProgress: state.inProgress.concat([action.payload.requestFrom])
+            });
+        }
+
+        default: {
+            return state;
         }
     }
 

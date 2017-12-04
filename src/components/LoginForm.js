@@ -37,7 +37,7 @@ const LoginForm = (props) => {
                     block
                     color="success"
                     >
-                {props.submitting ?
+                {props.isSubmitting ?
                     <span>
                         <i className="fa fa-spin fa-spinner"/> Logging In...
                     </span>
@@ -47,7 +47,7 @@ const LoginForm = (props) => {
                     <span>Login</span>
                 }
             </Button>
-            {console.log('props:', props, props.submitting)}
+            {console.log('props:', props, props.isSubmitting)}
 
 
         </form>
@@ -58,7 +58,7 @@ LoginForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     // pristine: React.PropTypes.bool.isRequired,
-    submitting: PropTypes.bool.isRequired
+    isSubmitting: PropTypes.bool.isRequired
 };
 
 // Decorate the form component
