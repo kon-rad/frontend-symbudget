@@ -1,4 +1,4 @@
-import {REQUEST__STARTED} from '../constants/ActionTypes';
+import {REQUEST__STARTED, REQUEST__FINISHED} from '../constants/ActionTypes';
 
 export default function request(state = {
     sendingRequest: false,
@@ -12,6 +12,16 @@ export default function request(state = {
             return Object.assign({}, state, {
                 sendingRequest: true,
                 inProgress: state.inProgress.concat([action.payload.requestFrom])
+            });
+        }
+
+        case REQUEST__FINISHED: {
+
+            let stillInProgress = state.inProgress.filter((item) =>  item !== action.payload.requestFrom);
+
+            return Object.assign({}, state, {
+                sendingRequest: stillInProgress.length > 0,
+                inProgress: stillInProgress
             });
         }
 

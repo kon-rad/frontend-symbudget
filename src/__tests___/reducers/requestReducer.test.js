@@ -1,5 +1,5 @@
 import request from '../../reducers/requestReducer';
-import {REQUEST__STARTED} from '../../constants/actionTypes';
+import {REQUEST__STARTED, REQUEST__FINISHED} from '../../constants/actionTypes';
 
 describe('Request Reducer', () => {
 
@@ -25,7 +25,7 @@ describe('Request Reducer', () => {
         });
     });
 
-    xit('can handle multiple instances of REQUEST__STARTED', () => {
+    it('can handle multiple instances of REQUEST__STARTED', () => {
 
         let action = {
             type: REQUEST__STARTED,
@@ -41,12 +41,74 @@ describe('Request Reducer', () => {
             inProgress: ['some.saga']
         });
 
-        newState = request(newState, action);
+        action = {
+            type: REQUEST__STARTED,
+            payload: {
+                requestFrom: 'another.saga'
+            }
+        };
 
+        newState = request(newState, action);
 
         expect(newState).toEqual({
             sendingRequest: true,
             inProgress: ['some.saga', 'another.saga']
+        });
+    });
+
+    it('can handle REQUEST__FINISHED', () => {
+
+        let state = {
+            sendingRequest: true,
+            inProgress: ['some.saga']
+        };
+
+        let action = {
+            type: REQUEST__FINISHED,
+            payload: {
+                requestFrom: 'some.saga'
+            }
+        };
+
+        expect(request(state, action)).toEqual({
+            sendingRequest: false,
+            inProgress: []
+        });
+    });
+
+    it('can handle multiple instances of REQUEST__FINISHED', () => {
+
+        let state = {
+            sendingRequest: true,
+            inProgress: ['some.saga', 'another.saga']
+        };
+
+        let action = {
+            type: REQUEST__FINISHED,
+            payload: {
+                requestFrom: 'some.saga'
+            }
+        };
+
+        let newState = request(state, action);
+
+        expect(newState).toEqual({
+            sendingRequest: true,
+            inProgress: ['another.saga']
+        });
+
+        action = {
+            type: REQUEST__FINISHED,
+            payload: {
+                requestFrom: 'another.saga'
+            }
+        };
+
+        newState = request(newState, action);
+
+        expect(newState).toEqual({
+            sendingRequest: false,
+            inProgress: []
         });
     });
 });
