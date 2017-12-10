@@ -1,4 +1,4 @@
-import {REQUEST__STARTED, REQUEST__FINISHED} from '../constants/ActionTypes';
+import {REQUEST__STARTED, REQUEST__FINISHED} from '../constants/actionTypes';
 
 export default function request(state = {
     sendingRequest: false,

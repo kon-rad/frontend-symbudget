@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router';
 import LoginForm from '../components/LoginForm';
-import * as types from '../constants/ActionTypes';
+import * as types from '../constants/actionTypes';
 // import '../styles/login-page.css';
 import {connect} from 'react-redux';
 

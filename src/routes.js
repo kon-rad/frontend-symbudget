@@ -5,6 +5,17 @@ import Dashboard from './containers/Dashboard';
 import HomePage from './components/HomePage.react';
 import LoginPage from './containers/LoginPage';
 import LogoutPage from './containers/LogoutPage';
+import ProfilePage from './containers/ProfilePage';
+import {routerActions} from 'react-router-redux';
+import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
+
+const userIsAuthenticated = connectedRouterRedirect({
+    redirectPath: '/login',
+    authenticatedSelector: (state) => state.auth.isAuthenticated,
+    wrapperDisplayName: 'UserIsAuthenticated'
+})
+
+
 // import ProfileContainer from './containers/ProfileContainer';
 // import RegistrationContainer from './containers/RegistrationContainer';
 // import NotFoundPage from './components/NotFoundPage.react';
@@ -27,6 +38,8 @@ export default (
             {/*<Route path="/about" component={AboutPage} />*/}
             <Route path="/login" component={LoginPage} />
             <Route path="/logout" component={LogoutPage} />
+
+            <Route path="/profile" component={userIsAuthenticated(ProfilePage)}/>
             {/*<Route path="/profile" component={ProfileContainer} />*/}
             {/*<Route path="/register" component={RegistrationContainer} />*/}
             {/*<Route path="*" component={NotFoundPage} />*/}

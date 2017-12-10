@@ -1,7 +1,7 @@
-import * as api from '../connectivity/api';
+import * as api from '../connectivity/api.auth';
 import {call, put} from 'redux-saga/effects';
 import {takeLatest, delay} from 'redux-saga';
-import * as types from '../constants/ActionTypes';
+import * as types from '../constants/actionTypes';
 import * as FORMS from '../constants/Forms';
 import jwtDecode from 'jwt-decode';
 import { push } from 'react-router-redux';
@@ -45,7 +45,6 @@ export function *doLogin(action) {
         });
 
     } finally {
-
 
         yield put({
             type: types.REQUEST__FINISHED,

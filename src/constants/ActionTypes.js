@@ -9,3 +9,7 @@ export const LOGIN__COMPLETED = 'login-completed';
 
 export const LOGOUT__REQUESTED = 'logout-requested';
 export const LOGOUT__COMPLETED = 'logout-completed';
+
+export const PROFILE__REQUESTED = 'PROFILE__REQUESTED';
+export const PROFILE__REQUESTED__COMPLETED = 'PROFILE__REQUESTED__COMPLETED';
+export const PROFILE__REQUESTED__FAILED = 'PROFILE__REQUESTED__FAILED';

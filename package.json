@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "babel-es6-polyfill": "^1.1.0",
+    "fetch-mock": "^5.13.1",
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6"
   },
@@ -68,6 +69,9 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
+    "globals": {
+      "API_BASE_URL": "bla"
+    },
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
     ],

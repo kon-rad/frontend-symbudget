@@ -82,6 +82,7 @@ function getClientEnvironment(publicUrl) {
       env[key] = JSON.stringify(raw[key]);
       return env;
     }, {}),
+      API_BASE_URL: JSON.stringify('http://localhost:8000/app_acceptance.php'),
   };
 
   return { raw, stringified };
