@@ -64,13 +64,14 @@ export function *doLoginSucceeded(action) {
 
     const {idToken} = action.payload;
 
-    const {id, username} = yield call(jwtDecode, idToken);
+    const {userId, username} = yield call(jwtDecode, idToken);
 
     yield put({
         type: types.LOGIN__COMPLETED,
         payload: {
-            id,
-            username
+            id: userId,
+            username,
+            token: idToken
         }
     });
 }
