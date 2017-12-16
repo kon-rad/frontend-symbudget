@@ -7,8 +7,12 @@ export default function *rootSaga() {
         fork(authSaga.watchLogin),
         fork(authSaga.watchLoginSucceeded),
         fork(authSaga.watchLoginFailed),
+
         fork(authSaga.watchLogoutRequested),
 
+        fork(profileSaga.watchChangePassword),
+        fork(profileSaga.watchChangePasswordSucceeded),
+        fork(profileSaga.watchChangePasswordFailed),
         fork(profileSaga.watchRequestProfile),
     ];
 }
