@@ -11,6 +11,7 @@ const ChangePasswordForm = (props) => {
             <Field component={FormField}
                    name="currentPassword"
                    type="password"
+                   label="Current Password"
                    placeholder="Current Password"
                    required="required"
                    className="form-control"
@@ -19,6 +20,7 @@ const ChangePasswordForm = (props) => {
             <Field component={FormField}
                    name="newPassword"
                    type="password"
+                   label="New Password"
                    placeholder="New Password"
                    required="required"
                    className="form-control"
@@ -27,6 +29,7 @@ const ChangePasswordForm = (props) => {
             <Field component={FormField}
                    name="newPasswordRepeated"
                    type="password"
+                   label="New Password Repeated"
                    placeholder="New Password Repeated"
                    required="required"
                    className="form-control"
@@ -49,8 +52,9 @@ const ChangePasswordForm = (props) => {
 };
 
 ChangePasswordForm.propTypes = {
-    isSubmitting: PropTypes.bool.isRequired,
-    onSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    isSubmitting: PropTypes.bool.isRequired
 };
 
 export default reduxForm({
