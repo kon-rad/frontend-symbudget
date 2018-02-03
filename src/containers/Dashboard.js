@@ -8,6 +8,10 @@ import request from 'request';
 const fetchBudgets = () => {
     return new Promise((resolve, reject) => {
         request(`http://127.0.0.1:8000/budgets`, function (error, response, body) {
+            if (error) {
+                console.log('error in dashboard.js 12: ' + error);
+                return error;
+            }
             resolve(JSON.parse(body));
         });
     });

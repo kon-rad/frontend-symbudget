@@ -30,6 +30,9 @@ class NavBar extends Component {
                     <NavLink href="/dashboard">Dashboard</NavLink>
                 </NavItem>
                 <NavItem>
+                    <NavLink href="/profile">Profile</NavLink>
+                </NavItem>
+                <NavItem>
                     <NavLink href="/logout">Logout</NavLink>
                 </NavItem>
             </Nav>
@@ -39,6 +42,9 @@ class NavBar extends Component {
             <Nav className="ml-auto" navbar>
                 <NavItem>
                     <NavLink href="/">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink href="/register">Register</NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink href="/login">Log in</NavLink>

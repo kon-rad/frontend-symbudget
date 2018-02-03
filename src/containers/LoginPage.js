@@ -12,7 +12,6 @@ class LoginPage extends Component {
         if (newProps.pageState.auth.isAuthenticated) {
             // this.props.router.replace('/');
             this.props.history.push('/dashboard');
-            console.log('success*********', this.props.history);
         }
     }
 

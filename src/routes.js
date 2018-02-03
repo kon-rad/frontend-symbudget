@@ -7,7 +7,8 @@ import LoginPage from './containers/LoginPage';
 import LogoutPage from './containers/LogoutPage';
 import ProfilePage from './containers/ProfilePage';
 import {routerActions} from 'react-router-redux';
-import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
+import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect';
+import RegistrationPage from './containers/RegistrationPage';
 
 const userIsAuthenticated = connectedRouterRedirect({
     redirectPath: '/login',
@@ -40,8 +41,8 @@ export default (
             <Route path="/logout" component={LogoutPage} />
 
             <Route path="/profile" component={userIsAuthenticated(ProfilePage)}/>
-            {/*<Route path="/profile" component={ProfileContainer} />*/}
-            {/*<Route path="/register" component={RegistrationContainer} />*/}
+            <Route path="/profile" component={ProfilePage} />
+            <Route path="/register" component={RegistrationPage} />
             {/*<Route path="*" component={NotFoundPage} />*/}
         </App>
     </BrowserRouter>

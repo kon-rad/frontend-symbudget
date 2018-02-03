@@ -1,8 +1,9 @@
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
+import {Field, Fields, reduxForm} from 'redux-form';
 import {Button} from 'reactstrap';
 import PropTypes from 'prop-types';
 import FormField from './FormField';
+import FormPasswordRepeatedFields from './FormPasswordRepeatedFields';
 
 const ChangePasswordForm = (props) => {
     return (
@@ -17,23 +18,7 @@ const ChangePasswordForm = (props) => {
                    className="form-control"
             />
 
-            <Field component={FormField}
-                   name="newPassword"
-                   type="password"
-                   label="New Password"
-                   placeholder="New Password"
-                   required="required"
-                   className="form-control"
-            />
-
-            <Field component={FormField}
-                   name="newPasswordRepeated"
-                   type="password"
-                   label="New Password Repeated"
-                   placeholder="New Password Repeated"
-                   required="required"
-                   className="form-control"
-            />
+            <Fields names={[ 'newPassword', 'newPasswordRepeated' ]} component={FormPasswordRepeatedFields}/>
 
             <Button type="submit"
                     size="lg"
